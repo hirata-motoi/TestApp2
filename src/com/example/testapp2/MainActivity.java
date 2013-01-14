@@ -9,7 +9,15 @@ import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 
+
+
+
 public class MainActivity extends Activity {
+	
+	public static final String CLIENT_ID = "422323033304.apps.googleusercontent.com";
+	public static final String CLIENT_SECRET = "your client secret";
+	public static final String SCOPE = "https://www.googleapis.com/auth/userinfo.profile";
+	  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,6 +53,18 @@ public class MainActivity extends Activity {
 				Log.d("button3", "button3 clicked");
 			}
 			
+		});
+		Button btn4 = (Button)findViewById(R.id.button4);
+		btn4.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.v("onClickBtn", "btn4 clicked");
+				Intent intent = new Intent(MainActivity.this, OAuth2GoogleActivity.class);
+				intent.putExtra(OAuth2GoogleActivity.CLIENT_ID, CLIENT_ID);
+				intent.putExtra(OAuth2GoogleActivity.CLIENT_SECRET, CLIENT_SECRET);
+				intent.putExtra(OAuth2GoogleActivity.SCOPE, SCOPE);
+				startActivityForResult(intent, OAuth2GoogleActivity.REQCODE_OAUTH);
+			}
 		});
 	}
 	@Override
